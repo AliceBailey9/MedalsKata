@@ -1,7 +1,35 @@
 function createMedalTable(medals) {
     // Parse the medal data to produce a medaltable
     // The winner gets 3 points, second place 2 points and third place 1 point
-    return
+    let scores = {};
+
+  for (let i = 0; i < medals.length; i++) {
+    for (let j = 0; j < medals[i].podium.length; j++) {
+      let country = medals[i].podium[j].slice(2);
+
+      if (medals[i].podium[j][0] === "1") {
+        if (scores.hasOwnProperty(country)) {
+          scores[country] += 3;
+        } else {
+          scores[country] = 3;
+        }
+      } else if (medals[i].podium[j][0] === "2") {
+        if (scores.hasOwnProperty(country)) {
+          scores[country] += 2;
+        } else {
+          scores[country] = 2;
+        }
+      } else if (medals[i].podium[j][0] === "3") {
+        if (scores.hasOwnProperty(country)) {
+          scores[country] += 1;
+        } else {
+          scores[country] = 1;
+        }
+      }
+    }
+  }
+  console.log(scores);
+  return scores;
 }
 
 describe("Medal Table Generator", () => {
